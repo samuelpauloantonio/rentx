@@ -1,10 +1,10 @@
 {
     "type": "postgres",
     "host": "localhost",
-    "port": 5433,
+    "port": 5532,
     "username": "postgres",
     "password": "docker",
-    "database": "vehicles",
+    "database": "rentx",
     "entities": ["./src/models/*.ts"],
     "migrations": ["./src/database/migrations/*.ts"],
     "cli": {

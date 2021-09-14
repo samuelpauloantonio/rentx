@@ -26,7 +26,7 @@ class CategoriesRespository implements ICategoryRepository {
         const category = new Categories();
 
         const Onecategory = Object.assign(category, {
-            name: name.trim(),
+            name,
             description,
         });
 
