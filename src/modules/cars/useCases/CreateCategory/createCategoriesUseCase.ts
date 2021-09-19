@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-constructor */
-import AppError from '../../../../erros/AppError';
+import { AppError } from '../../../../erros/AppError';
 import { ICategoryRepository } from '../../repositories/ICategoriesRepository';
 
 type RequeestCategoryProps = {
@@ -10,12 +10,15 @@ type RequeestCategoryProps = {
 class CreateCategoriesUseCase {
     constructor(private categoriesRepository: ICategoryRepository) {}
 
-    execute({ name, description }: RequeestCategoryProps): void {
-        const verifyAlreadyExist = this.categoriesRepository.findByName(name);
+    async execute({ name, description }: RequeestCategoryProps): Promise<void> {
+        const verifyAlreadyExist = await this.categoriesRepository.findByName(
+            name,
+        );
+
         if (verifyAlreadyExist) throw new AppError('category already exists!');
 
-        this.categoriesRepository.create({ name, description });
+        await this.categoriesRepository.create({ name, description });
     }
 }
 
-export { CreateCategoriesUseCase, AppError };
+export { CreateCategoriesUseCase };

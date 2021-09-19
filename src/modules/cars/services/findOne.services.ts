@@ -8,11 +8,11 @@ export default class FindOne {
     private categoriersRepository: ICategoryRepository;
 
     constructor(private CategoryRepository: ICategoryRepository) {
-        this.categoriersRepository = CategoryRepository;
+        this.categoriersRepository = this.CategoryRepository;
     }
 
-    execute(id: string): Categories {
-        const category = this.categoriersRepository.findOne(id);
+    async execute(id: string): Promise<Categories> {
+        const category = await this.categoriersRepository.findOne(id);
 
         if (!category) throw new AppError('Category not found ');
 
