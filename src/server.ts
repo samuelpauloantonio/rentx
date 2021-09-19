@@ -1,3 +1,4 @@
+import './database';
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
@@ -8,6 +9,7 @@ import AppError from './erros/AppError';
 import swaggerFile from './swagger.json';
 
 const server = express();
+
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 server.use(express.urlencoded({ extended: true }));
@@ -42,18 +44,21 @@ const options = {
 server.use(Routes);
 
 server.use(
-    (err: Error, request: Request, response: Response, _: NextFunction) => {
+    (err: Error, resquest: Request, response: Response, _: NextFunction) => {
         if (err instanceof AppError) {
             return response.status(err.statusCode).json({
-                err: err.statusCode,
+                status: 'error',
                 message: err.message,
             });
         }
-
-        return response.status(500).json({ status: err, message: err.message });
+        return response.status(500).json({
+            status: { error: 'error', err },
+            message: 'Internal server Error',
+        });
     },
 );
 
-server.listen(3336, () => {
-    console.log('🚀 server is running');
+const port = 3337;
+server.listen(port, () => {
+    console.log(`🚀 server is running ${port}`);
 });

@@ -6,8 +6,10 @@ import {
 class ListCategoriesUseCase {
     constructor(private categoryRepository: ICategoryRepository) {}
 
-    execute(): Categories[] {
-        const categories = this.categoryRepository.list();
+    async execute(id?: string): Promise<Categories[] | Categories> {
+        const categories = id
+            ? await this.categoryRepository.findOne(id)
+            : await this.categoryRepository.list();
 
         return categories;
     }
