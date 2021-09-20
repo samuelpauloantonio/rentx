@@ -1,12 +1,13 @@
 import './database';
 import 'reflect-metadata';
+import './shared/container';
 import express, { Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import expressSwagger from 'express-swagger-generator';
 import Routes from './routes';
 
-import AppError from './erros/AppError';
 import swaggerFile from './swagger.json';
+import { AppError } from './erros/AppError';
 
 const server = express();
 

@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-constructor */
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../erros/AppError';
 import { ICategoryRepository } from '../../repositories/ICategoriesRepository';
 
@@ -7,8 +8,12 @@ type RequeestCategoryProps = {
     description: string;
 };
 
+@injectable()
 class CreateCategoriesUseCase {
-    constructor(private categoriesRepository: ICategoryRepository) {}
+    constructor(
+        @inject('CategoryRepository')
+        private categoriesRepository: ICategoryRepository,
+    ) {}
 
     async execute({ name, description }: RequeestCategoryProps): Promise<void> {
         const verifyAlreadyExist = await this.categoriesRepository.findByName(
