@@ -1,14 +1,23 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { ImportCategoryUseCase } from './ImportCategoryUseCase';
 
 class ImportCategoryController {
-    constructor(private importCategoryUseCase: ImportCategoryUseCase) {}
+    public async handle(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        try {
+            const { file } = request;
 
-    public handle(request: Request, response: Response): Response {
-        const { file } = request;
-
-        this.importCategoryUseCase.excute(file);
-        return response.send('upload de arquivo feito');
+            const importCategoryUseCase = container.resolve(
+                ImportCategoryUseCase,
+            );
+            await importCategoryUseCase.excute(file);
+            return response.send('upload de arquivo feito');
+        } catch (error) {
+            return response.status(400).send(error);
+        }
     }
 }
 

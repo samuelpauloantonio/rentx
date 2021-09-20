@@ -1,16 +1,21 @@
-import { AppError } from '../CreateCategory/createCategoriesUseCase';
+import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../erros/AppError';
 import {
     ISpecificationsRepository,
     SpecificationsDTO,
 } from '../../repositories/ISpecificationsRepository';
 
+@injectable()
 class CreateSpecificationUseCase {
-    constructor(private specification: ISpecificationsRepository) {}
+    constructor(
+        @inject('CategoryRepository')
+        private specification: ISpecificationsRepository,
+    ) {}
 
-    execute({ name, description }: SpecificationsDTO): void {
-        const findOne = this.specification.findByName(name);
+    async execute({ name, description }: SpecificationsDTO): Promise<void> {
+        const findOne = await this.specification.findByName(name);
         if (findOne) throw new AppError('category already exists!');
-        this.specification.create({ name, description });
+        await this.specification.create({ name, description });
     }
 }
 
