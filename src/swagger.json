@@ -1,16 +1,13 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "RentalX Documentation",
+        "title": "RentX Documentation",
         "description": "This is an API Rent",
         "version": "1.0.0",
         "contact": {
             "email": "samueldev1997@gmail.com"
         }
     },
-
-
-
     "paths": {
         "/categories": {
             "post": {
@@ -21,15 +18,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
+                                "$ref": "#/components/schemas/Categories",
                                 "example": {
                                     "name": "Category example",
                                     "description": "Category description simple"
@@ -38,7 +27,6 @@
                         }
                     }
                 },
-
                 "responses": {
                     "201": {
                         "description": "Created"
@@ -48,7 +36,6 @@
                     }
                 }
             },
-
             "get": {
                 "tags": ["Category"],
                 "summary": "List All Category",
@@ -59,26 +46,96 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "description": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/Categories"
                                 }
                             }
                         }
                     }
                 }
             }
+        },
+        "/categories/import": {
+            "post": {
+                "tags": ["Category"],
+                "summary": "Upload a Category",
+                "description": "Upload a new list Category",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
 
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
 
+                    "400": {
+                        "description": "Category already exists!"
+                    }
+                }
+            }
+        },
+        "/specifications": {
+            "post": {
+                "tags": ["Specifications"],
+                "summary": "Create a specifications",
+                "description": "Create a new specifications",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Specifications"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created"
+                    },
+                    "500": {
+                        "description": "Specifications already exists!"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Specifications": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "descriptions": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "Categories": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
         }
     }
 }
