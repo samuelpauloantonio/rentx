@@ -7,21 +7,17 @@ class CreateSpecificationController {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        try {
-            const { name, description } = request.body;
+        const { name, description } = request.body;
 
-            const createSpecificationUsecase = container.resolve(
-                CreateSpecificationUseCase,
-            );
-            await createSpecificationUsecase.execute({
-                name,
-                description,
-            });
+        const createSpecificationUsecase = container.resolve(
+            CreateSpecificationUseCase,
+        );
+        await createSpecificationUsecase.execute({
+            name,
+            description,
+        });
 
-            return response.status(201).send();
-        } catch (error) {
-            return response.status(400).json(error);
-        }
+        return response.status(201).send();
     }
 }
 export { CreateSpecificationController };

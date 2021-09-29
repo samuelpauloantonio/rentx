@@ -7,17 +7,11 @@ class ImportCategoryController {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        try {
-            const { file } = request;
+        const { file } = request;
 
-            const importCategoryUseCase = container.resolve(
-                ImportCategoryUseCase,
-            );
-            await importCategoryUseCase.excute(file);
-            return response.send('upload de arquivo feito');
-        } catch (error) {
-            return response.status(400).send(error);
-        }
+        const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
+        await importCategoryUseCase.excute(file);
+        return response.send('upload de arquivo feito');
     }
 }
 

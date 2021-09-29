@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 import { ISignUSerDTO } from '../../dtos/IsingUserDTO';
 import { IUserRepository } from '../../repositories/IUserRepository';
+import { AppError } from '../../../../erros/AppError';
 
 interface IResponseSign {
     user: {
@@ -24,7 +25,7 @@ export class AuthenticateUserUseCase {
         const user = await this.userRepository.findByEmail(email);
 
         if (!user || !(await compare(password, user.password))) {
-            throw new Error('Email  or password incorrect!');
+            throw new AppError('Email  or password incorrect!');
         }
 
         const token = sign({}, '4bbd720299346eda6141790d1e4b7e5e', {

@@ -2,6 +2,7 @@ import './database';
 import 'reflect-metadata';
 import './shared/container';
 import express, { Request, Response, NextFunction } from 'express';
+import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 import expressSwagger from 'express-swagger-generator';
 import Routes from './routes';
@@ -30,7 +31,7 @@ server.use(
         }
         return response.status(500).json({
             status: { error: 'error', err },
-            message: 'Internal server Error',
+            message: `Internal server Error ${err}`,
         });
     },
 );
