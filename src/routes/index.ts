@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateUserRouter } from './autheticateUser.routes';
 
 import CategoriesRoutes from './categories.routes';
 import SpecificationRoutes from './specifications.routes';
@@ -11,5 +12,6 @@ routes.get('/', (request, response) => {
 routes.use('/categories', CategoriesRoutes);
 routes.use('/specifications', SpecificationRoutes);
 routes.use('/users', userRoutes);
+routes.use(authenticateUserRouter);
 
 export default routes;

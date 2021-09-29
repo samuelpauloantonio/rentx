@@ -17,8 +17,7 @@ export class UserController {
 
             return response.status(200).send();
         } catch (error) {
-            console.log(error);
-            return response.status(400).send(error);
+            return response.status(400).json(error.message);
         }
     }
 }
