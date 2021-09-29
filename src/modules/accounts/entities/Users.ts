@@ -14,10 +14,6 @@ export class UsersEntites {
     name: string;
 
     @Column()
-    @Column()
-    username: string;
-
-    @Column()
     email: string;
 
     @Column()
