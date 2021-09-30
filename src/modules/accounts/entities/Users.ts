@@ -20,6 +20,9 @@ export class UsersEntites {
     password: string;
 
     @Column()
+    avatar: string;
+
+    @Column()
     driver_license: string;
 
     @Column()

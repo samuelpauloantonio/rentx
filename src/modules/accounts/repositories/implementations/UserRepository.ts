@@ -16,26 +16,38 @@ export class UserRepository implements IUserRepository {
         email,
         password,
         driver_license,
+        avatar,
+        id,
     }: ICreateUserDTO): Promise<void> {
         const user = this.repository.create({
             name,
             email,
             password,
             driver_license,
+            avatar,
+            id,
         });
 
         await this.repository.save(user);
     }
 
-    async findByEmail(email: string): Promise<ICreateUserDTO> {
+    async findByEmail(email: string): Promise<UsersEntites> {
         const user = await this.repository.findOne({ email });
 
         return user;
     }
 
-    async findById(id: string): Promise<ICreateUserDTO> {
+    async findById(id: string): Promise<UsersEntites> {
         const user = await this.repository.findOne({ id });
 
         return user;
+    }
+
+    async findByIdAndUpdate(user: ICreateUserDTO): Promise<UsersEntites> {
+        const userUpdated = await this.repository.save({
+            ...user,
+        });
+
+        return userUpdated;
     }
 }
