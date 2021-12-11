@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateUserUseCase } from './createUserUseCase';
+import { CreateUserUseCase } from '@modules/accounts/useCases/createUserUseCase';
 
 export class UserController {
     async handle(request: Request, response: Response): Promise<Response> {

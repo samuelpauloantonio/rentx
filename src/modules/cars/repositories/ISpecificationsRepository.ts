@@ -1,4 +1,4 @@
-import Specification from '../entities/specification';
+import Specification from '@modules/cars/entities/specification';
 
 interface SpecificationsDTO {
     name: string;

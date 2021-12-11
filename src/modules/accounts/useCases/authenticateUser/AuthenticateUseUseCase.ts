@@ -1,9 +1,9 @@
 import { compare } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
-import { ISignUSerDTO } from '../../dtos/IsingUserDTO';
-import { IUserRepository } from '../../repositories/IUserRepository';
-import { AppError } from '../../../../erros/AppError';
+import { AppError } from '@erros/AppError';
+import { ISignUSerDTO } from '@modules/accounts/dtos/IsingUserDTO';
+import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 
 interface IResponseSign {
     user: {

@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev:db": "./src/scripts/start-db.sh",
-    "dev": "ts-node-dev  --inspect  --transpile-only  --ignore-watch node_modules   --respawn  ./src/server.ts ",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "dev": "ts-node-dev  -r tsconfig-paths/register  --inspect   --transpile-only  --ignore-watch node_modules   --respawn  ./src/server.ts ",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest"
   },
   "devDependencies": {
@@ -28,10 +28,10 @@
     "eslint-plugin-prettier": "^3.4.0",
     "git-commit-msg-linter": "^3.2.8",
     "jest": "^27.3.1",
-    "prettier": "^2.2.1",
-    "ts-jest": "^27.0.7"
-  },
-  "dependencies": {
+    "prettier": "^2.2.1"
+},
+"dependencies": {
+    "ts-jest": "^27.0.7",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "csv-parser": "^3.0.0",

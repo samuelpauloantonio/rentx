@@ -2,7 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import {
     ISpecificationsRepository,
     SpecificationsDTO,
-} from '../ISpecificationsRepository';
+} from '@modules/cars/repositories/ISpecificationsRepository';
 
 import Specifications from '../../entities/specification';
 
