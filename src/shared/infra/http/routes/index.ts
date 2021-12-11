@@ -1,9 +1,9 @@
 import express from 'express';
-import { authenticateUserRouter } from './autheticateUser.routes';
+import { userRoutes } from '@shared/infra/http/routes/users.routes';
+import CategoriesRoutes from '@shared/infra/http/routes/categories.routes';
+import { authenticateUserRouter } from '@shared/infra/http/routes/autheticateUser.routes';
 
-import CategoriesRoutes from './categories.routes';
-import SpecificationRoutes from './specifications.routes';
-import { userRoutes } from './users.routes';
+import SpecificationRoutes from '@shared/infra/http/routes/specifications.routes';
 
 const routes = express.Router();
 routes.get('/', (request, response) => {

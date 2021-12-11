@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import { AppError } from '../erros/AppError';
-import { UserRepository } from '../modules/accounts/repositories/implementations/UserRepository';
+import { UserRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
+import { AppError } from '@shared/erros/AppError';
 
 interface IPayload {
     sub: string;

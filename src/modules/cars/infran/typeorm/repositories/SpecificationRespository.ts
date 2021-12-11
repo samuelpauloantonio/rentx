@@ -4,7 +4,7 @@ import {
     SpecificationsDTO,
 } from '@modules/cars/repositories/ISpecificationsRepository';
 
-import Specifications from '../../entities/specification';
+import Specifications from '@modules/cars/infran/typeorm/entities/specification';
 
 class SpecificationRepository implements ISpecificationsRepository {
     private repository: Repository<Specifications>;

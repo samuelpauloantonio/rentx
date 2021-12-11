@@ -1,4 +1,5 @@
-import AppError from '../../../erros/AppError';
+import { AppError } from '@shared/erros/AppError';
+
 import {
     Categories,
     ICategoryRepository,

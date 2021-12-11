@@ -1,7 +1,7 @@
 import { compare } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
-import { AppError } from '@erros/AppError';
+import { AppError } from '@shared/erros/AppError';
 import { ISignUSerDTO } from '@modules/accounts/dtos/IsingUserDTO';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 

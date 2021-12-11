@@ -1,5 +1,5 @@
-import { ICreateCategoryDTO } from '@modules/cars/repositories/implementations/CategoriesRespository';
-import Categories from '../entities/categories';
+import { ICreateCategoryDTO } from '@modules/cars/infran/typeorm/repositories/CategoriesRespository';
+import Categories from '@modules/cars/infran/typeorm/entities/categories';
 
 interface ICategoryRepository {
     findByName(name: string): Promise<Categories>;

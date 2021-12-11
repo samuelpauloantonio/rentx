@@ -2,7 +2,7 @@ import { ICreateUserDTO } from '@modules/accounts/dtos/IcreateUserDTO';
 import { v4 as uuid } from 'uuid';
 
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
-import { UsersEntites } from '@modules/accounts/entities/Users';
+import { UsersEntites } from '@modules/accounts/infra/typeorm/entities/Users';
 
 export class UserRespositoryInMemory implements IUserRepository {
     User: UsersEntites[] = [];

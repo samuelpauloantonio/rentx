@@ -1,5 +1,5 @@
 import express from 'express';
-import { AuthenticateUserController } from '../modules/accounts/useCases/authenticateUser/AuthenticateUserController';
+import { AuthenticateUserController } from '@modules/accounts/useCases/authenticateUser/AuthenticateUserController';
 
 const authenticateUserRouter = express.Router();
 
