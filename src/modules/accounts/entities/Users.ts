@@ -7,7 +7,7 @@ import {
 
 @Entity('users')
 export class UsersEntites {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -29,5 +29,5 @@ export class UsersEntites {
     isAdmin: boolean;
 
     @CreateDateColumn()
-    created_at: Date;
+    created_at?: Date;
 }

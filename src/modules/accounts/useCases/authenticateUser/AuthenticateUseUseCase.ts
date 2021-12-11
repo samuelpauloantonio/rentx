@@ -22,23 +22,27 @@ export class AuthenticateUserUseCase {
     ) {}
 
     async execute({ email, password }: ISignUSerDTO): Promise<IResponseSign> {
-        const user = await this.userRepository.findByEmail(email);
+        try {
+            const user = await this.userRepository.findByEmail(email);
 
-        if (!user || !(await compare(password, user.password))) {
-            throw new AppError('Email  or password incorrect!');
+            if (!user || !(await compare(password, user.password))) {
+                throw new AppError('Email  or password incorrect!');
+            }
+
+            const token = sign({}, '4bbd720299346eda6141790d1e4b7e5e', {
+                subject: user.id,
+                expiresIn: '1d',
+            });
+
+            return {
+                user: {
+                    name: user.name,
+                    email: user.email,
+                },
+                token,
+            };
+        } catch (error) {
+            throw new AppError(error);
         }
-
-        const token = sign({}, '4bbd720299346eda6141790d1e4b7e5e', {
-            subject: user.id,
-            expiresIn: '1d',
-        });
-
-        return {
-            user: {
-                name: user.name,
-                email: user.email,
-            },
-            token,
-        };
     }
 }
