@@ -1,13 +1,13 @@
 import { CreateCarDTO } from '@modules/cars/dto/createCarDTO';
-import { Car } from '@modules/cars/infran/typeorm/entities/car';
+import { Car } from '@modules/cars/infra/typeorm/entities/car';
 import { ICarRepository } from '@modules/cars/repositories/ICarRepository';
 import { AppError } from '@shared/erros/AppError';
 import { inject, injectable } from 'tsyringe';
 
-// @injectable()
+@injectable()
 export class CreateCarUseCase {
     constructor(
-        // @inject('CarRepository')
+        @inject('CarRepository')
         private carRepository: ICarRepository,
     ) {}
 

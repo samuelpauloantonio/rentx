@@ -19,4 +19,4 @@ class Categories {
     @CreateDateColumn()
     created_at: Date;
 }
-export default Categories;
+export { Categories };

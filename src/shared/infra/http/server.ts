@@ -1,4 +1,4 @@
-import '@shared/infra/typeorm';
+import connectionDb from '@shared/infra/typeorm';
 
 import 'reflect-metadata';
 import '@shared/container';
@@ -11,6 +11,7 @@ import Routes from './routes';
 
 import swaggerFile from '../../../swagger.json';
 
+connectionDb();
 const server = express();
 
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));

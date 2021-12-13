@@ -1,4 +1,4 @@
-import Specification from '@modules/cars/infran/typeorm/entities/specification';
+import Specification from '@modules/cars/infra/typeorm/entities/specification';
 
 interface SpecificationsDTO {
     name: string;
