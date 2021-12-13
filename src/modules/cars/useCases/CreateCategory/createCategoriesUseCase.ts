@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-constructor */
 import { AppError } from '@shared/erros/AppError';
 import { ICategoryRepository } from '@modules/cars/repositories/ICategoriesRepository';
 import { inject, injectable } from 'tsyringe';

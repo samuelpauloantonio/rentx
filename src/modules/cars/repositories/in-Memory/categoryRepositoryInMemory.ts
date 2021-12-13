@@ -5,6 +5,8 @@ import {
     ICreateCategoryDTO,
 } from '../ICategoriesRepository';
 
+type NewType = ICreateCategoryDTO;
+
 export class CategoryRepositoryInMemory implements ICategoryRepository {
     categories: Categories[] = [];
 
@@ -16,7 +18,7 @@ export class CategoryRepositoryInMemory implements ICategoryRepository {
         return this.categories;
     }
 
-    async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+    async create({ name, description }: NewType): Promise<void> {
         const category = new Categories();
 
         Object.assign(category, {
