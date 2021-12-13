@@ -35,9 +35,9 @@ export class CarRepository implements ICarRepository {
             fine_amount,
         });
 
-        await this.carRepository.save(car);
+        const carSaved = await this.carRepository.save(car);
 
-        return car;
+        return carSaved;
     }
 
     async findByLicencePlate(license_plate: string): Promise<Car> {
