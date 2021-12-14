@@ -12,6 +12,7 @@ export class DeleteFieldUsernameInTableUsers1632903217351
             new TableColumn({
                 name: 'username',
                 type: 'varchar',
+                isNullable: true,
             }),
         );
     }

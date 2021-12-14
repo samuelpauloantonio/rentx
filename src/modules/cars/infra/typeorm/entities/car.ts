@@ -15,6 +15,9 @@ export class Car {
     id: string;
 
     @Column()
+    license_plate: string;
+
+    @Column()
     name: string;
 
     @Column()
@@ -34,9 +37,6 @@ export class Car {
 
     @CreateDateColumn()
     created_at: Date;
-
-    @Column({ type: String })
-    license_plate: string;
 
     @ManyToOne(() => Categories)
     @JoinColumn({ name: 'category_id' })
