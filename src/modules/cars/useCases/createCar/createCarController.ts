@@ -13,6 +13,7 @@ export class CreateCarController {
             fine_amount,
             license_plate,
             name,
+            brand,
         }: CreateCarDTO = request.body;
 
         const car = await createCarUsecase.execute({
@@ -22,6 +23,7 @@ export class CreateCarController {
             category_id,
             daily_rate,
             license_plate,
+            brand,
         });
 
         return response.status(201).json(car);

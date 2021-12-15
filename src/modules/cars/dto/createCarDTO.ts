@@ -5,4 +5,5 @@ export interface CreateCarDTO {
     daily_rate: number;
     category_id: string;
     fine_amount: number;
+    brand: string;
 }

@@ -18,7 +18,7 @@ export class CategoryRepositoryInMemory implements ICategoryRepository {
         return this.categories;
     }
 
-    async create({ name, description }: NewType): Promise<void> {
+    async create({ name, description }: NewType): Promise<Categories> {
         const category = new Categories();
 
         Object.assign(category, {
@@ -28,5 +28,11 @@ export class CategoryRepositoryInMemory implements ICategoryRepository {
         });
 
         this.categories.push(category);
+
+        return category;
+    }
+
+    async findOne(id: string): Promise<Categories> {
+        return this.categories.find(category => category.id === id);
     }
 }

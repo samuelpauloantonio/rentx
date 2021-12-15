@@ -1,5 +1,6 @@
 import { CreateCarDTO } from '@modules/cars/dto/createCarDTO';
 import { Car } from '@modules/cars/infra/typeorm/entities/car';
+import { ISearchCars } from '@modules/cars/useCases/listAvailableCars/listAvailableCarsUseCase';
 import { ICarRepository } from '../ICarRepository';
 
 export class CarRepositoryInMemory implements ICarRepository {
@@ -12,6 +13,7 @@ export class CarRepositoryInMemory implements ICarRepository {
         category_id,
         fine_amount,
         license_plate,
+        brand,
     }: CreateCarDTO): Promise<Car> {
         const createCar = new Car();
 
@@ -22,6 +24,7 @@ export class CarRepositoryInMemory implements ICarRepository {
             category_id,
             fine_amount,
             license_plate,
+            brand,
         });
 
         this.car.push(createCar);
@@ -30,5 +33,25 @@ export class CarRepositoryInMemory implements ICarRepository {
 
     async findByLicencePlate(licence_plate: string): Promise<Car> {
         return this.car.find(el => el.license_plate === licence_plate);
+    }
+
+    async listAllCarsAvailable({
+        brand,
+        name,
+        category_id,
+    }: ISearchCars): Promise<Car[]> {
+        return this.car.filter(el => {
+            const available = el.available === true;
+            if (
+                available ||
+                (available && brand && el.brand === brand) ||
+                (available && name && el.name === name) ||
+                (available && category_id && el.category_id === category_id)
+            ) {
+                return el;
+            }
+
+            return null;
+        });
     }
 }

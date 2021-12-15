@@ -27,6 +27,9 @@ export class Car {
     daily_rate: number;
 
     @Column()
+    brand: string;
+
+    @Column()
     category_id: string;
 
     @Column()
