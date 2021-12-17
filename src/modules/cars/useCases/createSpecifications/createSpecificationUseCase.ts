@@ -8,7 +8,7 @@ import {
 @injectable()
 class CreateSpecificationUseCase {
     constructor(
-        @inject('CategoryRepository')
+        @inject('SpecificationsRepository')
         private specification: ISpecificationsRepository,
     ) {}
 

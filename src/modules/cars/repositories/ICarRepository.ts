@@ -10,4 +10,6 @@ export interface ICarRepository {
         name,
         category_id,
     }: ISearchCars): Promise<Car[]>;
+
+    findOne(id: string): Promise<Car>;
 }

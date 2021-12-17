@@ -26,12 +26,11 @@ O usuário não precisa estar logado no sistema. <br/>
 
 **RF** <br/>
 Deve ser possivel cadastrar uma especificação para um carro. <br/>
-Deve ser possivel listar todos as especificações. <br/>
-Deve ser possivel listar todos os carros. <br/>
+
 
 **RN** <br/>
-Não de ser possivel cadastrar uma especificação para um carro não . <br/>cadastrado . <br/>
-Não de ser possivel cadastrar uma especificação já existente para o mesmo. <br/> carro. <br/>
+Não de ser possivel cadastrar uma especificação para um carro não  cadastrado. <br/>
+Não de ser possivel cadastrar uma especificação já existente para o mesmo carro. <br/>
 O usuário  responsável pelo cadastro deve ser um usuário administrador. <br/>
 
 # Cadastro de imagens do carro

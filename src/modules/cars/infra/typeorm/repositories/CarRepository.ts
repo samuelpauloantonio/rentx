@@ -13,6 +13,7 @@ export class CarRepository implements ICarRepository {
     }
 
     async create({
+        id,
         name,
         description,
         daily_rate,
@@ -20,8 +21,10 @@ export class CarRepository implements ICarRepository {
         license_plate,
         fine_amount,
         brand,
+        specifications,
     }: CreateCarDTO): Promise<Car> {
         const car = this.carRepository.create({
+            id,
             name,
             description,
             daily_rate,
@@ -29,6 +32,7 @@ export class CarRepository implements ICarRepository {
             license_plate,
             fine_amount,
             brand,
+            specifications,
         });
 
         const carSaved = await this.carRepository.save(car);
@@ -48,7 +52,7 @@ export class CarRepository implements ICarRepository {
         name,
         category_id,
     }: ISearchCars): Promise<Car[]> {
-        const carsQuery = await this.carRepository
+        const carsQuery = this.carRepository
             .createQueryBuilder('c')
             .where('available = :available', { available: true });
 
@@ -67,5 +71,10 @@ export class CarRepository implements ICarRepository {
         const results = await carsQuery.getMany();
 
         return results;
+    }
+
+    async findOne(id: string): Promise<Car> {
+        const car = await this.carRepository.findOne({ id });
+        return car;
     }
 }

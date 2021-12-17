@@ -7,6 +7,7 @@ export class CarRepositoryInMemory implements ICarRepository {
     car: Car[] = [];
 
     async create({
+        id,
         name,
         description,
         daily_rate,
@@ -14,10 +15,12 @@ export class CarRepositoryInMemory implements ICarRepository {
         fine_amount,
         license_plate,
         brand,
+        specifications,
     }: CreateCarDTO): Promise<Car> {
         const createCar = new Car();
 
         Object.assign(createCar, {
+            id,
             name,
             description,
             daily_rate,
@@ -25,6 +28,7 @@ export class CarRepositoryInMemory implements ICarRepository {
             fine_amount,
             license_plate,
             brand,
+            specifications,
         });
 
         this.car.push(createCar);
@@ -53,5 +57,9 @@ export class CarRepositoryInMemory implements ICarRepository {
 
             return null;
         });
+    }
+
+    async findOne(id: string): Promise<Car> {
+        return this.car.find(el => el.id === id);
     }
 }
