@@ -1,6 +1,12 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
+@Entity('cars_image')
 export class CarImage {
     @PrimaryGeneratedColumn()
     id: string;
