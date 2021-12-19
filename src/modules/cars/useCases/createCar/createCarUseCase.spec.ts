@@ -25,7 +25,7 @@ describe('Create Car', () => {
     });
 
     it('Should not be able to create car with plate already exists', async () => {
-        await expect(async () => {
+        expect(async () => {
             await createCarUseCase.execute({
                 category_id: 'categoria teste',
                 daily_rate: 11233,
