@@ -20,9 +20,8 @@ export class CreateCarUseCase {
         license_plate,
         brand,
     }: CreateCarDTO): Promise<Car> {
-        const checkCarIfAlreadyExists = await this.carRepository.findByLicencePlate(
-            license_plate,
-        );
+        const checkCarIfAlreadyExists =
+            await this.carRepository.findByLicencePlate(license_plate);
 
         if (checkCarIfAlreadyExists)
             throw new AppError('Car with this plate already exists');
