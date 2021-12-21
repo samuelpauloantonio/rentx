@@ -3,6 +3,7 @@ import { AppError } from '@shared/erros/AppError';
 import { Rental } from '@modules/rentals/infra/typeorm/entity/Rentals';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { IDateProviders } from '@shared/container/providers/DateProvides/IDateProviders';
 
 dayjs.extend(utc);
 
@@ -15,7 +16,10 @@ interface IRequest {
 }
 
 export class CreateRentalsUseCase {
-    constructor(private readonly rentalRepository: IRentalRepository) {}
+    constructor(
+        private readonly rentalRepository: IRentalRepository,
+        private readonly dateProvider: IDateProviders,
+    ) {}
 
     async execute({
         car_id,
@@ -23,7 +27,6 @@ export class CreateRentalsUseCase {
         user_id,
     }: IRequest): Promise<Rental> {
         const minumHour = 24;
-
         // Não deve ser possivel cadatrar um novo aluguel caso  já exista um aberto  para o mesmo carro . <br/>
 
         const carUnavalible = await this.rentalRepository.findOpenRentalByCar(
@@ -41,16 +44,10 @@ export class CreateRentalsUseCase {
         if (rentalsOpenToUser) {
             throw new AppError('Theres a rental in progress for user ');
         }
-
-        const expecteDateReturnFormated = dayjs(expected_return_date)
-            .utc()
-            .local()
-            .format();
-
-        const oneDay = dayjs().utc().local().format();
-        const compareDate = dayjs(expecteDateReturnFormated).diff(
-            oneDay,
-            'hours',
+        const dateNow = this.dateProvider.dateNow();
+        const compareDate = this.dateProvider.compareDateInHour(
+            dateNow,
+            expected_return_date,
         );
 
         if (compareDate < minumHour) {
