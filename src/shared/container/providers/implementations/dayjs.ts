@@ -1,5 +1,8 @@
-import { IDateProviders } from '@shared/container/providers/DateProvides/IDateProviders';
+import { IDateProviders } from '@shared/container/providers/DateDayjsProvides/IDateProviders';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 export class DayjsProvider implements IDateProviders {
     compareDateInHour(start_date: Date, end_date: Date): number {

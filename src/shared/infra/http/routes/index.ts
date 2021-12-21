@@ -5,6 +5,7 @@ import { authenticateUserRouter } from '@shared/infra/http/routes/autheticateUse
 
 import SpecificationRoutes from '@shared/infra/http/routes/specifications.routes';
 import { carsRouter } from './cars.routes';
+import { rentalRouter } from './rentals.routes';
 
 const routes = express.Router();
 routes.get('/', (request, response) => {
@@ -14,6 +15,7 @@ routes.use('/categories', CategoriesRoutes);
 routes.use('/specifications', SpecificationRoutes);
 routes.use('/cars', carsRouter);
 routes.use('/users', userRoutes);
+routes.use('/rentals', rentalRouter);
 routes.use(authenticateUserRouter);
 
 export default routes;

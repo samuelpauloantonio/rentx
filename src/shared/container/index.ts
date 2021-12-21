@@ -1,4 +1,5 @@
 import { container } from 'tsyringe';
+import '@shared/container/providers/DateDayjsProvides/index';
 import { UserRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 import { ICategoryRepository } from '@modules/cars/repositories/ICategoriesRepository';
@@ -9,6 +10,8 @@ import { ICarRepository } from '@modules/cars/repositories/ICarRepository';
 import { CarRepository } from '@modules/cars/infra/typeorm/repositories/CarRepository';
 import { ICarImageRepository } from '@modules/cars/repositories/ICarImageRepository';
 import { CarImageRepository } from '@modules/cars/infra/typeorm/repositories/CarImageRepository';
+import { IRentalRepository } from '@modules/rentals/repositories/IrentalsRepository';
+import { RentalRepository } from '@modules/rentals/infra/typeorm/repositories/rentalsRepository';
 
 container.registerSingleton<ICategoryRepository>(
     'CategoryRepository',
@@ -27,4 +30,9 @@ container.registerSingleton<ICarRepository>('CarRepository', CarRepository);
 container.registerSingleton<ICarImageRepository>(
     'CarImageRepository',
     CarImageRepository,
+);
+
+container.registerSingleton<IRentalRepository>(
+    'RentalRepository',
+    RentalRepository,
 );
