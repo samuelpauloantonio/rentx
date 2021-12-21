@@ -31,7 +31,7 @@ describe('Create Car Specification', () => {
 
         const specification = await specificationsRepositoryInMemory.create({
             name: 'nova specificacao1',
-            description: 'description teste',
+            description: 'description test',
         });
         const carSpecification = await createCarSpecificationUseCase.execute({
             car_id: car.id,
@@ -43,11 +43,11 @@ describe('Create Car Specification', () => {
     });
 
     it('Should not be able to add new Car specification for car not-existent ', async () => {
-        expect(async () => {
-            const specifications = ['nova specificacao'];
+        await expect(async () => {
+            const specifications = ['new specification'];
 
             await createCarSpecificationUseCase.execute({
-                car_id: 'id nao existe',
+                car_id: 'id not exist',
                 specifications,
             });
         }).rejects.toBeInstanceOf(AppError);

@@ -23,21 +23,17 @@ export class CreateCarSpecificationUseCase {
         car_id,
         specifications,
     }: IRequestCreateCarSpecification): Promise<Car> {
-        try {
-            const checkIfCarExist = await this.carRepository.findOne(car_id);
+        const checkIfCarExist = await this.carRepository.findOne(car_id);
 
-            if (!checkIfCarExist) throw new AppError('Car not  found');
+        if (!checkIfCarExist) throw new AppError('Car not  found');
 
-            const specificationsFiltereds =
-                await this.specificationRepository.findByIds(specifications);
+        const specificationsFiltered =
+            await this.specificationRepository.findByIds(specifications);
 
-            checkIfCarExist.specifications = specificationsFiltereds;
+        checkIfCarExist.specifications = specificationsFiltered;
 
-            const result = await this.carRepository.create(checkIfCarExist);
+        const result = await this.carRepository.create(checkIfCarExist);
 
-            return result;
-        } catch (error) {
-            return error;
-        }
+        return result;
     }
 }
