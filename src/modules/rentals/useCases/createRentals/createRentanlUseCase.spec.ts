@@ -3,20 +3,24 @@ import { CreateRentalsUseCase } from '@modules/rentals/useCases/createRentals/cr
 import { AppError } from '@shared/erros/AppError';
 import dayjs from 'dayjs';
 import { DayjsProvider } from '@shared/container/providers/implementations/dayjs';
+import { CarRepository } from '@modules/cars/infra/typeorm/repositories/CarRepository';
 
 let createRentalsUseCase: CreateRentalsUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
 let dayJsProvider: DayjsProvider;
 let dateFormatted: Date;
+let carRepository: CarRepository;
 
 describe('Create Rentals', () => {
     beforeEach(() => {
         dateFormatted = dayjs().add(1, 'day').toDate();
         dayJsProvider = new DayjsProvider();
         rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
+        carRepository = new CarRepository();
         createRentalsUseCase = new CreateRentalsUseCase(
             rentalsRepositoryInMemory,
             dayJsProvider,
+            carRepository,
         );
     });
     it('Should be able to create a new Rentals', async () => {

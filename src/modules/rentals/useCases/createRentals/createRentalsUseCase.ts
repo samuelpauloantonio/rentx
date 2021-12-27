@@ -4,6 +4,7 @@ import { Rental } from '@modules/rentals/infra/typeorm/entity/Rentals';
 
 import { IDateProviders } from '@shared/container/providers/DateDayjsProvides/IDateProviders';
 import { inject, injectable } from 'tsyringe';
+import { ICarRepository } from '@modules/cars/repositories/ICarRepository';
 
 // dayjs.extend(utc);
 
@@ -20,6 +21,8 @@ export class CreateRentalsUseCase {
         private readonly rentalRepository: IRentalRepository,
         @inject('DayJsDateProvider')
         private readonly dateProvider: IDateProviders,
+        @inject('CarRepository')
+        private CarRepository: ICarRepository,
     ) {}
 
     async execute({
@@ -57,6 +60,8 @@ export class CreateRentalsUseCase {
             user_id,
             expected_return_date,
         });
+
+        await this.CarRepository.updateAvailable(car_id, false);
 
         return rental;
     }
