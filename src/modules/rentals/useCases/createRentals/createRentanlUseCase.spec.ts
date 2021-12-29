@@ -3,20 +3,20 @@ import { CreateRentalsUseCase } from '@modules/rentals/useCases/createRentals/cr
 import { AppError } from '@shared/erros/AppError';
 import dayjs from 'dayjs';
 import { DayjsProvider } from '@shared/container/providers/implementations/dayjs';
-import { CarRepository } from '@modules/cars/infra/typeorm/repositories/CarRepository';
+import { CarRepositoryInMemory } from '@modules/cars/repositories/in-Memory/carRepositoryInMemory';
 
 let createRentalsUseCase: CreateRentalsUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
 let dayJsProvider: DayjsProvider;
 let dateFormatted: Date;
-let carRepository: CarRepository;
+let carRepository: CarRepositoryInMemory;
 
 describe('Create Rentals', () => {
     beforeEach(() => {
         dateFormatted = dayjs().add(1, 'day').toDate();
         dayJsProvider = new DayjsProvider();
         rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
-        carRepository = new CarRepository();
+        carRepository = new CarRepositoryInMemory();
         createRentalsUseCase = new CreateRentalsUseCase(
             rentalsRepositoryInMemory,
             dayJsProvider,
@@ -24,8 +24,18 @@ describe('Create Rentals', () => {
         );
     });
     it('Should be able to create a new Rentals', async () => {
+        const car = await carRepository.create({
+            name: 'carro  novo',
+            description: 'Carro non',
+            fine_amount: 200,
+            category_id: 'e6f15036-ba69-41f-b111',
+            daily_rate: 1221,
+            license_plate: 'ba69',
+            brand: 'Corola',
+        });
+
         const rental = await createRentalsUseCase.execute({
-            car_id: '123445',
+            car_id: car.id,
             user_id: '111223',
             expected_return_date: dateFormatted,
         });
@@ -35,35 +45,54 @@ describe('Create Rentals', () => {
     });
 
     it('Should not  be able to create a new Rental if there is another open to the same user', async () => {
+        const car = await carRepository.create({
+            name: 'carro de test um',
+            description: 'Carro lento',
+            fine_amount: 200,
+            category_id: 'e6f15036-ba69-4a1f-b111',
+            daily_rate: 1223,
+            license_plate: '12343',
+            brand: 'Corola',
+        });
+
+        await createRentalsUseCase.execute({
+            car_id: car.id,
+            user_id: '111277',
+            expected_return_date: dateFormatted,
+        });
+
         await expect(async () => {
             await createRentalsUseCase.execute({
-                car_id: '1234e',
+                car_id: car.id,
                 user_id: '111277',
                 expected_return_date: dateFormatted,
             });
-
-            await createRentalsUseCase.execute({
-                car_id: '1234409',
-                user_id: '111277',
-                expected_return_date: dateFormatted,
-            });
-        }).rejects.toBeInstanceOf(AppError);
+        }).rejects.toEqual(new AppError('Car is Unavailable'));
     });
 
     it('Should not  be able to create a new Rental if there is another open to the same Car', async () => {
+        const car = await carRepository.create({
+            name: 'carro de test',
+            description: 'description 1',
+            fine_amount: 200,
+            category_id: 'e6f15036-ba69-4a1f-b111',
+            daily_rate: 1223,
+            license_plate: '1234q',
+            brand: 'Corola',
+        });
+        await createRentalsUseCase.execute({
+            car_id: car.id,
+            user_id: '111223',
+            expected_return_date: dateFormatted,
+        });
+
         await expect(async () => {
             await createRentalsUseCase.execute({
-                car_id: '123446',
-                user_id: '111223',
-                expected_return_date: dateFormatted,
-            });
-
-            await createRentalsUseCase.execute({
-                car_id: '123446',
+                car_id: car.id,
                 user_id: '111277',
                 expected_return_date: dateFormatted,
             });
-        }).rejects.toBeInstanceOf(AppError);
+        }).rejects.toEqual(new AppError('Car is Unavailable'));
     });
 
     it('Should not  be able to create a new Rental with invalid date', async () => {
@@ -73,6 +102,6 @@ describe('Create Rentals', () => {
                 user_id: '111277',
                 expected_return_date: dayjs().toDate(),
             });
-        }).rejects.toBeInstanceOf(AppError);
+        }).rejects.toEqual(new AppError('Invalid Time Date'));
     });
 });

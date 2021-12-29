@@ -44,7 +44,7 @@ export class CreateRentalsUseCase {
             await this.rentalRepository.findOpenRentalByUser(user_id);
 
         if (rentalsOpenToUser) {
-            throw new AppError('Theres a rental in progress for user ');
+            throw new AppError('Theres a rental in progress for user');
         }
         const dateNow = this.dateProvider.dateNow();
         const compareDate = this.dateProvider.compareDateInHour(

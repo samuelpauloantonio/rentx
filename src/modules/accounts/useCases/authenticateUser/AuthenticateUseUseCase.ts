@@ -25,7 +25,7 @@ export class AuthenticateUserUseCase {
         try {
             const user = await this.userRepository.findByEmail(email);
 
-            if (!user || !(await compare(password, user.password))) {
+            if (!user || (user && !(await compare(password, user.password)))) {
                 throw new AppError('Email  or password incorrect!');
             }
 
@@ -42,7 +42,7 @@ export class AuthenticateUserUseCase {
                 token,
             };
         } catch (error) {
-            throw new AppError(error);
+            throw new AppError(error.message);
         }
     }
 }

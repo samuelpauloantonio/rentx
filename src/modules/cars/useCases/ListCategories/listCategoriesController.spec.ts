@@ -41,6 +41,15 @@ describe('List Category', () => {
                 Authorization: `Bearer ${body.token}`,
             });
 
+        await request(app)
+            .post('/categories')
+            .send({
+                name: 'category supertes2',
+                description: 'description supertes2',
+            })
+            .set({
+                Authorization: `Bearer ${body.token}`,
+            });
         const response = await request(app)
             .get('/categories')
             .set({
