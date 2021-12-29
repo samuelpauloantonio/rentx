@@ -9,42 +9,39 @@
         }
     },
     "paths": {
-
         "/sessions": {
-            "post" : {
-                "tags": ["Session"],
+            "post": {
+                "tags": [
+                    "Session"
+                ],
                 "summary": "Authentication user",
                 "description": "Authentication user",
                 "requestBody": {
                     "content": {
-                        "application/json":{
-                            "schema" : {
+                        "application/json": {
+                            "schema": {
                                 "type": "object",
                                 "properties": {
                                     "email": {
                                         "type": "string"
                                     },
-
                                     "password": {
                                         "type": "string"
                                     }
                                 }
                             },
-                            "example" : {
-                                "email":"spa@gmail.com",
-                                "password":"1244"
+                            "example": {
+                                "email": "spa@gmail.com",
+                                "password": "1244"
                             }
                         }
                     }
-
                 },
-
                 "responses": {
-                    "200" : {
+                    "200": {
                         "description": "Success"
                     },
-
-                    "400" : {
+                    "400": {
                         "description": "Email or password Incorrect"
                     }
                 }
@@ -52,11 +49,15 @@
         },
         "/categories": {
             "post": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "Create a category",
                 "description": "Create new Category",
                 "security": [
-                    {"bearerAuth" : []}
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "requestBody": {
                     "content": {
@@ -81,12 +82,14 @@
                 }
             },
             "get": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "List All Category",
                 "description": "List all  cartegory Route",
                 "security": [
                     {
-                        "bearerAuth" : []
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -105,12 +108,14 @@
         },
         "/categories/import": {
             "post": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "Upload a Category",
                 "description": "Upload a new list Category",
                 "security": [
                     {
-                        "bearerAuth" : []
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -128,12 +133,10 @@
                         }
                     }
                 },
-
                 "responses": {
                     "201": {
                         "description": "Created"
                     },
-
                     "400": {
                         "description": "Category already exists!"
                     }
@@ -142,12 +145,14 @@
         },
         "/specifications": {
             "post": {
-                "tags": ["Specifications"],
+                "tags": [
+                    "Specifications"
+                ],
                 "summary": "Create a specifications",
                 "description": "Create a new specifications",
                 "security": [
                     {
-                        "bearerAuth" : []
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -168,11 +173,44 @@
                     }
                 }
             }
+        },
+        "/cars": {
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create a new Car",
+                "description": "This endpoint allow  to create a new  Car",
+                "security": [
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref":"#components/schemas/Cars"
+                            },
+                            "example": {
+                                "name": "Toyota de exemplo",
+                                "description": "Carro de exemplo",
+                                "fine_amount": 200,
+                                "category_id": "e6f15036-ba69-4a1f-b111-46c8be5da7af",
+                                "daily_rate": 100,
+                                "license_plate": "abc_125",
+                                "brand": "Corola exemplo "
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "securitySchemes": {
-            "bearerAuth":{
+            "bearerAuth": {
                 "type": "http",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
@@ -190,7 +228,6 @@
                     }
                 }
             },
-
             "Categories": {
                 "type": "object",
                 "properties": {
@@ -201,8 +238,34 @@
                         "type": "string"
                     }
                 }
+            },
+
+            "Cars": {
+                "type":  "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "fine_amount": {
+                        "type": "number"
+                    },
+                    "category_id": {
+                        "type": "string"
+                    },
+                    "daily_rate": {
+                        "type": "number"
+                    },
+                    "license_plate": {
+                        "type": "string"
+                    },
+                    "brand": {
+                        "type": "string"
+                    }
+                }
             }
         }
     }
-
 }
