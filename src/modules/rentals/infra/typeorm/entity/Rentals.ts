@@ -1,7 +1,10 @@
+import { Car } from '@modules/cars/infra/typeorm/entities/car';
 import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
+    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -23,6 +26,10 @@ export class Rental {
 
     @Column()
     end_date: Date;
+
+    @ManyToOne(() => Car)
+    @JoinColumn({ name: 'car_id' })
+    car: [];
 
     @Column('numeric')
     total: number;
