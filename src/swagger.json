@@ -9,11 +9,55 @@
         }
     },
     "paths": {
+
+        "/sessions": {
+            "post" : {
+                "tags": ["Session"],
+                "summary": "Authentication user",
+                "description": "Authentication user",
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema" : {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example" : {
+                                "email":"spa@gmail.com",
+                                "password":"1244"
+                            }
+                        }
+                    }
+
+                },
+
+                "responses": {
+                    "200" : {
+                        "description": "Success"
+                    },
+
+                    "400" : {
+                        "description": "Email or password Incorrect"
+                    }
+                }
+            }
+        },
         "/categories": {
             "post": {
                 "tags": ["Category"],
                 "summary": "Create a category",
                 "description": "Create new Category",
+                "security": [
+                    {"bearerAuth" : []}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -40,6 +84,11 @@
                 "tags": ["Category"],
                 "summary": "List All Category",
                 "description": "List all  cartegory Route",
+                "security": [
+                    {
+                        "bearerAuth" : []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -59,6 +108,11 @@
                 "tags": ["Category"],
                 "summary": "Upload a Category",
                 "description": "Upload a new list Category",
+                "security": [
+                    {
+                        "bearerAuth" : []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -91,6 +145,11 @@
                 "tags": ["Specifications"],
                 "summary": "Create a specifications",
                 "description": "Create a new specifications",
+                "security": [
+                    {
+                        "bearerAuth" : []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -112,6 +171,13 @@
         }
     },
     "components": {
+        "securitySchemes": {
+            "bearerAuth":{
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        },
         "schemas": {
             "Specifications": {
                 "type": "object",
@@ -138,4 +204,5 @@
             }
         }
     }
+
 }
