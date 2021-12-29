@@ -49,7 +49,9 @@ O usuário  responsável pelo cadastro deve ser um usuário administrador. <br/>
 # Aluguel de  carro
 
 **RF** <br/>
-Deve ser possivel cadastrar um aluguel. <br/>
+Deve ser possivel cadastrar um aluguel.
+Deve ser possivel listar todos os alugueis do usuario
+ <br/>
 
 
 **RN** <br/>
