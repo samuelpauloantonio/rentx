@@ -183,7 +183,7 @@
                 "description": "This endpoint allow  to create a new  Car",
                 "security": [
                     {
-                        "bearerAuth":[]
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -191,7 +191,7 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "$ref":"#components/schemas/Cars"
+                                "$ref": "#components/schemas/Cars"
                             },
                             "example": {
                                 "name": "Toyota de exemplo",
@@ -203,6 +203,54 @@
                                 "brand": "Corola exemplo "
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/cars/images/{id}": {
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Upload image Cars",
+                "description": "This endpoint below to upload image Car",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "car id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
                     }
                 }
             }
@@ -239,9 +287,8 @@
                     }
                 }
             },
-
             "Cars": {
-                "type":  "object",
+                "type": "object",
                 "properties": {
                     "name": {
                         "type": "string"
