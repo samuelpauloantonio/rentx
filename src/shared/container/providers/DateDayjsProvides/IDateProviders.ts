@@ -3,4 +3,5 @@ export interface IDateProviders {
     convertDateToUtc(data: Date): string;
     dateNow(): Date;
     compareDateInDays(start_date: Date, end_date: Date): number;
+    addDays(days: number): Date;
 }

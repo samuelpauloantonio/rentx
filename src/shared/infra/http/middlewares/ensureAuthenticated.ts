@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import { UserRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { AppError } from '@shared/erros/AppError';
+import AuthConfig from '@config/auth';
+import { UserRefreshRepository } from '@modules/accounts/infra/typeorm/repositories/UserTokenRepository';
 
 interface IPayload {
     sub: string;
@@ -17,14 +18,20 @@ export async function ensureAuthenticated(
 
         if (!authHeader) throw new AppError('token is missing!', 401);
 
+        const userRefreshRepository = new UserRefreshRepository();
+
         const [, token] = authHeader.split(' ');
 
+        const { secret_refresh_token } = AuthConfig;
         const { sub: user_id } = verify(
             token,
-            '4bbd720299346eda6141790d1e4b7e5e',
+            secret_refresh_token,
         ) as IPayload;
 
-        const user = await new UserRepository().findById(user_id);
+        const user = await userRefreshRepository.findOneByUserAndRefreshToken(
+            user_id,
+            token,
+        );
 
         if (!user) throw new AppError('User Does Not found');
 

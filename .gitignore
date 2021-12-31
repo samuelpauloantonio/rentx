@@ -2,3 +2,11 @@ node_modules
 coverage/*
 tmp/avatar/*
 tmp/cars/*
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/codeStyles/Project.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/jsLinters/eslint.xml
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/rentx.iml
+/.idea/vcs.xml

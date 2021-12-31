@@ -4,6 +4,9 @@ import { sign } from 'jsonwebtoken';
 import { AppError } from '@shared/erros/AppError';
 import { ISignUSerDTO } from '@modules/accounts/dtos/IsingUserDTO';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
+import AuthConfig from '@config/auth';
+import { DayjsProvider } from '@shared/container/providers/implementations/dayjs';
+import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
 
 interface IResponseSign {
     user: {
@@ -12,6 +15,7 @@ interface IResponseSign {
     };
 
     token: string;
+    refresh_token: string;
 }
 
 @injectable()
@@ -19,6 +23,10 @@ export class AuthenticateUserUseCase {
     constructor(
         @inject('UserRepository')
         private readonly userRepository: IUserRepository,
+        @inject('DayJsDateProvider')
+        private readonly providerDate: DayjsProvider,
+        @inject('UserTokenRepository')
+        private readonly userRefreshToken: IUserTokenRepository,
     ) {}
 
     async execute({ email, password }: ISignUSerDTO): Promise<IResponseSign> {
@@ -29,9 +37,36 @@ export class AuthenticateUserUseCase {
                 throw new AppError('Email  or password incorrect!');
             }
 
-            const token = sign({}, '4bbd720299346eda6141790d1e4b7e5e', {
+            const {
+                expires_in_refresh_token,
+                expires_in_refresh_token_days,
+                expires_in_token,
+                secret_refresh_token,
+                secret_token,
+            } = AuthConfig;
+
+            const token = sign({}, secret_token, {
                 subject: user.id,
-                expiresIn: '1d',
+                expiresIn: expires_in_token,
+            });
+
+            const refresh_token = sign(
+                {
+                    email: user.email,
+                },
+                secret_refresh_token,
+                {
+                    subject: user.id,
+                    expiresIn: expires_in_refresh_token,
+                },
+            );
+
+            await this.userRefreshToken.create({
+                user_id: user.id,
+                refresh_token,
+                expires_date: this.providerDate.addDays(
+                    expires_in_refresh_token_days,
+                ),
             });
 
             return {
@@ -40,6 +75,7 @@ export class AuthenticateUserUseCase {
                     email: user.email,
                 },
                 token,
+                refresh_token,
             };
         } catch (error) {
             throw new AppError(error.message);
