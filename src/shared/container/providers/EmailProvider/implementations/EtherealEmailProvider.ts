@@ -4,6 +4,9 @@ import { SendEmailDTO } from '@shared/container/providers/EmailProvider/dto/send
 import nodeMailer, { Transporter } from 'nodemailer';
 import { injectable } from 'tsyringe';
 
+import fs from 'fs';
+import handleBars from 'handlebars';
+
 @injectable()
 export class EtherealEmailProvider implements IEmailProvider {
     private client: Transporter;
@@ -25,13 +28,21 @@ export class EtherealEmailProvider implements IEmailProvider {
             .catch(err => console.error(err));
     }
 
-    async sendEmail({ to: email, subject, body }: SendEmailDTO): Promise<void> {
+    async sendEmail({
+        to: email,
+        subject,
+        variables,
+        path,
+    }: SendEmailDTO): Promise<void> {
+        const templateFileContent = fs.readFileSync(path).toString('utf-8');
+        const templateParse = handleBars.compile(templateFileContent);
+        const templateHTML = templateParse(variables);
+
         const message = await this.client.sendMail({
             from: 'Sender Name <sender@example.com>',
             to: `Recipient  ${email}`,
             subject,
-            text: body,
-            html: body,
+            html: templateHTML,
         });
 
         console.log('Message sent: %s', message.messageId);

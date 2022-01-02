@@ -5,6 +5,7 @@ import { IDateProviders } from '@shared/container/providers/DateDayjsProvides/ID
 import { AppError } from '@shared/erros/AppError';
 import { v4 as uuidV4 } from 'uuid';
 import { IEmailProvider } from '@shared/container/providers/EmailProvider/IEmailProvider';
+import { resolve } from 'path';
 
 @injectable()
 export class SendForgotPasswordUseCase {
@@ -26,6 +27,14 @@ export class SendForgotPasswordUseCase {
         if (!user) {
             throw new AppError('User does not exists', 404);
         }
+        const templatePaths = resolve(
+            __dirname,
+            '..',
+            '..',
+            'views',
+            'emails',
+            'forgotPassword.hbs',
+        );
 
         const token = uuidV4();
         const expires_date = this.DateProvider.addHours(3);
@@ -36,10 +45,16 @@ export class SendForgotPasswordUseCase {
             expires_date,
         });
 
+        const variables = {
+            name: user.name,
+            link: `${process.env.FORGOT_MAIL_URL}${token}`,
+        };
+
         await this.etherealEmailProvider.sendEmail({
             to: email,
             subject: 'Recuperação de senha',
-            body: `O link para o seu reset é ${token}`,
+            path: templatePaths,
+            variables,
         });
     }
 }

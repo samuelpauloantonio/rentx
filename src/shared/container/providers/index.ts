@@ -6,7 +6,7 @@ import { DayjsProvider } from '@shared/container/providers/DateDayjsProvides/imp
 
 container.registerSingleton<IDateProviders>('DayJsDateProvider', DayjsProvider);
 
-container.registerSingleton<IEmailProvider>(
+container.registerInstance<IEmailProvider>(
     'EtherealEmailProvider',
-    EtherealEmailProvider,
+    new EtherealEmailProvider(),
 );

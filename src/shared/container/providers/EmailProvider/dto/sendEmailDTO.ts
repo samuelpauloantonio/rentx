@@ -1,5 +1,6 @@
 export interface SendEmailDTO {
     to: string;
     subject: string;
-    body: string;
+    variables: any;
+    path: string;
 }
