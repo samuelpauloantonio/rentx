@@ -1,5 +1,5 @@
 import { container } from 'tsyringe';
-import '@shared/container/providers/DateDayjsProvides/index';
+import '@shared/container/providers';
 import { UserRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 import { ICategoryRepository } from '@modules/cars/repositories/ICategoriesRepository';

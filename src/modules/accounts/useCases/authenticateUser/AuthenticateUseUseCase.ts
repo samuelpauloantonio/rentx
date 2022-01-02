@@ -5,7 +5,7 @@ import { AppError } from '@shared/erros/AppError';
 import { ISignUSerDTO } from '@modules/accounts/dtos/IsingUserDTO';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 import AuthConfig from '@config/auth';
-import { DayjsProvider } from '@shared/container/providers/implementations/dayjs';
+import { DayjsProvider } from '@shared/container/providers/DateDayjsProvides/implementations/dayjs';
 import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
 
 interface IResponseSign {
