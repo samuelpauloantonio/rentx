@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { IDateProviders } from '@shared/container/providers/DateDayjsProvides/IDateProviders';
-import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
+import { IUserTokenRepository } from '@modules/accounts/repositories/IUserTokenRepository';
 import { verify, sign } from 'jsonwebtoken';
 import AuthConfig from '@config/auth';
 import { AppError } from '@shared/erros/AppError';

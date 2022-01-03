@@ -12,7 +12,7 @@ import { ICarImageRepository } from '@modules/cars/repositories/ICarImageReposit
 import { CarImageRepository } from '@modules/cars/infra/typeorm/repositories/CarImageRepository';
 import { IRentalRepository } from '@modules/rentals/repositories/IrentalsRepository';
 import { RentalRepository } from '@modules/rentals/infra/typeorm/repositories/rentalsRepository';
-import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
+import { IUserTokenRepository } from '@modules/accounts/repositories/IUserTokenRepository';
 import { UserRefreshRepository } from '@modules/accounts/infra/typeorm/repositories/UserTokenRepository';
 
 container.registerSingleton<ICategoryRepository>(

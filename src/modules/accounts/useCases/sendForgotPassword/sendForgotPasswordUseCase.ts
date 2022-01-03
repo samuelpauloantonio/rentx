@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
-import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
+import { IUserTokenRepository } from '@modules/accounts/repositories/IUserTokenRepository';
 import { IDateProviders } from '@shared/container/providers/DateDayjsProvides/IDateProviders';
 import { AppError } from '@shared/erros/AppError';
 import { v4 as uuidV4 } from 'uuid';

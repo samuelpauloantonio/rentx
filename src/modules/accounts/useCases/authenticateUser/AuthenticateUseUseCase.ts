@@ -6,7 +6,7 @@ import { ISignUSerDTO } from '@modules/accounts/dtos/IsingUserDTO';
 import { IUserRepository } from '@modules/accounts/repositories/IUserRepository';
 import AuthConfig from '@config/auth';
 import { DayjsProvider } from '@shared/container/providers/DateDayjsProvides/implementations/dayjs';
-import { IUserTokenRepository } from '@modules/cars/repositories/IUserTokenRepository';
+import { IUserTokenRepository } from '@modules/accounts/repositories/IUserTokenRepository';
 
 interface IResponseSign {
     user: {
