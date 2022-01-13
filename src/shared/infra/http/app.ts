@@ -1,5 +1,5 @@
+import 'dotenv/config';
 import connectionDb from '@shared/infra/typeorm';
-
 import 'reflect-metadata';
 import '@shared/container';
 import express, { Request, Response, NextFunction } from 'express';

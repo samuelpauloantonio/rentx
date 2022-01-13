@@ -9,7 +9,7 @@ import { ensureAdmin } from '@shared/infra/http/middlewares/ensureAdmin';
 const userController = new UserController();
 const updateUseAvatarController = new UpdateUserAvaterController();
 
-const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
+const uploadAvatar = multer(uploadConfig);
 
 const userRoutes = express.Router();
 

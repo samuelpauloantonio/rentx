@@ -4,10 +4,10 @@ import { RefreshTokenUseCase } from '@modules/accounts/useCases/refreshToken/ref
 
 export class RefreshTokenController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { token } =
+        const { refresh_token: refresh } =
             request.body || request.headers['x-access-token'] || request.query;
         const refreshTokenUseCase = container.resolve(RefreshTokenUseCase);
-        const refresh_token = await refreshTokenUseCase.execute(token);
+        const refresh_token = await refreshTokenUseCase.execute(refresh);
 
         return response.json({ refresh_token });
     }
