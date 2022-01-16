@@ -30,7 +30,7 @@ export class SesEmailProvider implements IEmailProvider {
 
         await this.client.sendMail({
             from: 'Rentx <rentx@samuelpauloantonio.tech>',
-            to: `Recipient  ${email}`,
+            to: email,
             subject,
             html: templateHTML,
         });
