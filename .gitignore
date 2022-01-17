@@ -12,3 +12,4 @@ tmp/cars/*
 /.idea/rentx.iml
 /.idea/vcs.xml
 /.env
+dist
