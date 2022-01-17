@@ -31,7 +31,7 @@ export class UsersEntites {
     isAdmin: boolean;
 
     @Expose()
-    avatar_url(): string {
+    avatar_url?(): string {
         switch (process.env.Disk) {
             case 'local':
                 return `${process.env.APP_API_URL}/avatar/${this.avatar}`;
