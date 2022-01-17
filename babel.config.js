@@ -9,27 +9,27 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          "@modules": [
+          "@modules": 
             "./src/modules"
-          ],
-          "@config": [
+          ,
+          "@config": 
             "./src/config"
-          ],
-          "@database": [
+          ,
+          "@database": 
             "./src/database"
-          ],
-          "@erros": [
+          ,
+          "@erros": 
             "./src/erros"
-          ],
-          "@routes": [
+          ,
+          "@routes": 
             "./src/routes"
-          ],
-          "@shared": [
+          ,
+          "@shared": 
             "./src/shared"
-          ],
-          "@utils": [
+          ,
+          "@utils": 
             "./src/utils"
-          ]
+          
         }
       }
     ],
