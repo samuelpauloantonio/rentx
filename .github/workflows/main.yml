@@ -21,10 +21,10 @@ jobs:
       with:
         node-version: 16.x
     - name : install dependencies
-      run : yarn 
+      run : npm install
       
     - name : Build
-      run : yarn build
+      run : npm run build
 
 ## Enviando  os aquivos para a nossa instancias na EC2 com o SCP files , ele copia e envia ficheiros via ssh
 
