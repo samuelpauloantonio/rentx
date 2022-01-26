@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import cors from 'cors';
 import connectionDb from '@shared/infra/typeorm';
 import 'reflect-metadata';
 import '@shared/container';
@@ -25,6 +26,11 @@ app.use(express.json());
 expressSwagger(app);
 
 app.use(Routes);
+app.use(
+    cors({
+        origin: '*',
+    }),
+);
 
 app.use(
     (err: Error, resquest: Request, response: Response, _: NextFunction) => {

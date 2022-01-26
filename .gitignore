@@ -14,3 +14,4 @@ tmp/cars/*
 .env
 dist
 ormconfig.json
+yarn-error.log
