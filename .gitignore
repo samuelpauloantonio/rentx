@@ -11,5 +11,6 @@ tmp/cars/*
 /.idea/modules.xml
 /.idea/rentx.iml
 /.idea/vcs.xml
-/.env
+.env
 dist
+ormconfig.json
