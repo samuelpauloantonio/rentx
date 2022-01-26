@@ -10,7 +10,11 @@ import { rentalRouter } from './rentals.routes';
 
 const routes = express.Router();
 routes.get('/', (request, response) => {
-    return response.json('ok');
+    return response.json({
+        Api_version: process.env.npm_package_version,
+        Author: 'Samuel Paulo António',
+        Email: 'samueldev1997@gmail.com',
+    });
 });
 routes.use('/categories', CategoriesRoutes);
 routes.use('/specifications', SpecificationRoutes);
