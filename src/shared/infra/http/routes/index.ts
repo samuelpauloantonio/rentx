@@ -9,8 +9,9 @@ import { carsRouter } from './cars.routes';
 import { rentalRouter } from './rentals.routes';
 
 const routes = express.Router();
+const version = process.env.npm_package_version;
+
 routes.get('/', (request, response) => {
-    const version = process.env.npm_package_version;
     return response.json({
         Api_version: version,
         Author: 'Samuel Paulo António',
