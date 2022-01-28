@@ -11,6 +11,7 @@ import { rentalRouter } from './rentals.routes';
 const routes = express.Router();
 routes.get('/', (request, response) => {
     const version = process.env.npm_package_version;
+
     return response.json({
         Api_version: version,
         Author: 'Samuel Paulo António',
