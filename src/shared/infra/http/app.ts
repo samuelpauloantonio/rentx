@@ -12,10 +12,12 @@ import upload from '@config/upload';
 import Routes from './routes';
 
 import swaggerFile from '../../../swagger.json';
+import rateLimiterMiddleware from './middlewares/rateLimiter';
 
 connectionDb();
 const app = express();
 
+app.use(rateLimiterMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use('/avatar/', express.static(`${upload.tmpFolder}/avatar`));
 app.use('/cars/', express.static(`${upload.tmpFolder}/cars`));

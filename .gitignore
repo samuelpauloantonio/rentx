@@ -15,3 +15,4 @@ tmp/cars/*
 dist
 ormconfig.json
 yarn-error.log
+docker-compose.yml
