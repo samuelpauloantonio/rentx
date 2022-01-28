@@ -47,7 +47,8 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "redis": "^3.1.2",
+    "@sentry/node": "^6.17.2",
+    "@sentry/tracing": "^6.17.2",
     "@types/supertest": "^2.0.11",
     "aws-sdk": "^2.1055.0",
     "axios": "^0.21.1",
@@ -67,6 +68,7 @@
     "nodemailer": "^6.7.2",
     "pg": "^8.6.0",
     "rate-limiter-flexible": "^2.3.6",
+    "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "supertest": "^6.1.6",
     "swagger-ui-express": "^4.1.6",
